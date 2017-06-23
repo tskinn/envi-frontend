@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MdToolbarModule, MdInputModule } from '@angular/material';
+import { MdToolbarModule, MdInputModule, MdTabsModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+/* Feature Modules */
+import { CoreModule } from './core/core.module';
+
 
 @NgModule({
   declarations: [
@@ -12,12 +16,15 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     MdToolbarModule,
-    MdInputModule
+    MdInputModule,
+    MdTabsModule
   ],
   exports: [
     MdToolbarModule,
-    MdInputModule
+    MdInputModule,
+    MdTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
