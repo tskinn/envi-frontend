@@ -7,8 +7,8 @@ import { UnauthGuardService } from './core/unauth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'search',
-    pathMatch: 'full'
+    redirectTo: '/login',
+    pathMatch: "full"
   },
   {
     path: 'login',
@@ -26,8 +26,13 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'io',
-    loadChildren: 'app/io/io.module#IoModule',
+    path: 'import',
+    loadChildren: 'app/import/import.module#ImportModule',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'export',
+    loadChildren: 'app/export/export.module#ExportModule',
     canActivate: [AuthGuardService]
   }
 ];

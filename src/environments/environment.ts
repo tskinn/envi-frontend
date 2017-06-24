@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   identityPoolId: "",
   clientId: "",
-  region: ""
+  region: "",
+  tableName: ""
 };

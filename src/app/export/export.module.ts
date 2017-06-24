@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { IoRoutingModule } from './io-routing.module';
+import { ExportRoutingModule } from './export-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    IoRoutingModule
+    ExportRoutingModule
   ],
   declarations: []
 })
-export class IoModule { }
+export class ExportModule { }
