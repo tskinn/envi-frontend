@@ -23,8 +23,8 @@ export class DynamodbService {
       Item: {
         name: { S: item.name },
         environment: { S: item.environment },
-        lock: { N: item.lock },
-        vars: { M: item.vars.toString() }
+        lock: { N: item.lock.toString() },
+        vars: { M: item.vars }
       }
     }
   }

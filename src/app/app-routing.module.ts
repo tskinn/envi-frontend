@@ -16,23 +16,8 @@ const routes: Routes = [
     canActivate: [UnauthGuardService]
   },
   {
-    path: 'edit',
-    loadChildren: 'app/edit/edit.module#EditModule',
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'search',
-    loadChildren: 'app/search/search.module#SearchModule',
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'import',
-    loadChildren: 'app/import/import.module#ImportModule',
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'export',
-    loadChildren: 'app/export/export.module#ExportModule',
+    path: 'envi',
+    loadChildren: 'app/private/private.module#PrivateModule',
     canActivate: [AuthGuardService]
   }
 ];

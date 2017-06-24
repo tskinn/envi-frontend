@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdInputModule } from '@angular/material';
+import { MdInputModule, MdButtonModule } from '@angular/material';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginContainerComponent } from './login-container/login-container.component';
@@ -8,7 +8,9 @@ import { LoginContainerComponent } from './login-container/login-container.compo
 @NgModule({
   imports: [
     CommonModule,
-    MdInputModule
+    MdInputModule,
+    MdButtonModule,
+    LoginRoutingModule
   ],
   declarations: [LoginContainerComponent]
 })

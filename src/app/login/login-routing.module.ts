@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginContainerComponent } from './login-container/login-container.component';
 
 const routes: Routes = [
-  { path: '**', component: LoginContainerComponent }
+  { path: '', component: LoginContainerComponent }
 ];
 
 @NgModule({

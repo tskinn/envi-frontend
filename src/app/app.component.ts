@@ -10,7 +10,7 @@ import { CognitoService } from './core/cognito.service';
     <md-toolbar color="primary" class="toolbar">
       <span>Welcome to {{title}}!!</span>
       <span class="spacer"></span>
-      <button md-button *ngIf="(loggedIn | async)">Logout</button>
+      <button md-button *ngIf="(loggedIn | async)" (click)="logout()">Logout</button>
     </md-toolbar>
     <md-sidenav-container class="container">
       <md-sidenav #sidenav mode="side" [opened]="loggedIn | async" class="sidenav">
@@ -62,10 +62,10 @@ export class AppComponent implements OnInit {
   loggedIn: Observable<boolean>;
   title = 'app';
   navLinks = [
-    { "name": "search", "icon": "search" },
-    { "name": "edit", "icon": "create" },
-    { "name": "import", "icon": "file_upload" },
-    { "name": "export", "icon": "get_app" }
+    { "name": "envi/search", "icon": "search" },
+    { "name": "envi/edit", "icon": "create" },
+    { "name": "envi/import", "icon": "file_upload" },
+    { "name": "envi/export", "icon": "get_app" }
   ]
 
   constructor(private cognito: CognitoService) {
@@ -80,6 +80,10 @@ export class AppComponent implements OnInit {
       }
     }
     console.log(item);
+  }
+
+  logout() {
+    this.cognito.logout();
   }
 
   ngOnInit() {

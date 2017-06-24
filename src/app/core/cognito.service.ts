@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -15,7 +16,17 @@ export class CognitoService {
   private jwtToken: string;
   private logger = new BehaviorSubject<boolean>(false);
   public cognitoCreds: AWS.CognitoIdentityCredentials;
-  constructor() { }
+  constructor(private router: Router) { }
+
+  login() {
+    this.logger.next(true);
+    this.router.navigate(['/envi/search']);
+  }
+
+  logout() {
+    this.logger.next(false);
+    this.router.navigate(['/login']);
+  }
 
   isLoggedIn(): Observable<boolean> {
     return this.logger.asObservable();
