@@ -16,10 +16,11 @@ const routes: Routes = [
     canActivate: [UnauthGuardService]
   },
   {
-    path: 'envi',
+    path: 'private',
     loadChildren: 'app/private/private.module#PrivateModule',
     canActivate: [AuthGuardService]
   }
+
 ];
 
 @NgModule({

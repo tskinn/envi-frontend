@@ -8,7 +8,8 @@ import {
   MdSidenavModule,
   MdListModule,
   MdIconModule,
-  MdButtonModule
+  MdButtonModule,
+  MdCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -34,6 +35,7 @@ import { CoreModule } from './core/core.module';
     MdListModule,
     MdIconModule,
     MdButtonModule,
+    MdCardModule,
     FlexLayoutModule,
     BrowserAnimationsModule
   ],
@@ -44,7 +46,8 @@ import { CoreModule } from './core/core.module';
     MdSidenavModule,
     MdListModule,
     MdIconModule,
-    MdButtonModule
+    MdButtonModule,
+    MdCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

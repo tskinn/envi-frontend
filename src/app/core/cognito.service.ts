@@ -20,7 +20,7 @@ export class CognitoService {
 
   login() {
     this.logger.next(true);
-    this.router.navigate(['/envi/search']);
+    this.router.navigate(['/private/search']);
   }
 
   logout() {

@@ -23,7 +23,7 @@ export class UnauthGuardService {
   checkLogin(): boolean {
     console.log("checking loging from unauth");
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['/envi/search']);
+      this.router.navigate(['/private/search']);
       return false;
     }
     return true;
