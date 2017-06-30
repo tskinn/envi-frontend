@@ -8,6 +8,7 @@ import { SearchComponent } from './search/search.component';
 import { EditComponent } from './edit/edit.component';
 import { ImportComponent } from './import/import.component';
 import { ExportComponent } from './export/export.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { ExportComponent } from './export/export.component';
     MdIconModule,
     MdInputModule
   ],
-  declarations: [SearchComponent, EditComponent, ImportComponent, ExportComponent]
+  declarations: [SearchComponent, EditComponent, ImportComponent, ExportComponent, MainComponent]
 })
 export class PrivateModule { }

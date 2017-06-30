@@ -13,25 +13,35 @@ import { CognitoService } from './core/cognito.service';
     <md-toolbar color="primary" class="toolbar">
       <span>Envi</span>
       <span class="spacer"></span>
-      <button md-button *ngIf="(loggedIn | async)" (click)="logout()">Logout</button>
+      <button md-icon-button *ngIf="loggedIn | async" (click)="refresh()">
+        <md-icon>refresh</md-icon>
+      </button>
+	   <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="loggedIn | async">
+        <md-icon>more_vert</md-icon>
+	   </button>
+		<md-menu #menu="mdMenu">
+        <button md-menu-item (click)="logout()">
+          <md-icon>exit_to_app</md-icon>
+          <span>Logout</span>
+        </button>
+        <button md-menu-item>
+          <md-icon>file_upload</md-icon>
+          <span>Import</span>
+        </button>
+        <button md-menu-item>
+          <md-icon>get_app</md-icon>
+          <span>Export</span>
+        </button>
+      </md-menu>
     </md-toolbar>
-    <md-sidenav-container class="container">
-      <md-sidenav #sidenav mode="side" [opened]="loggedIn | async" class="sidenav">
-        <md-nav-list>
-          <md-list-item  *ngFor="let link of navLinks" [routerLink]=[link.route] routerLinkActive="active">
-            <a md-line ><md-icon class="material-icons">{{link.icon}}</md-icon></a>
-          </md-list-item>
-        </md-nav-list>
-      </md-sidenav>
-      <div class="content">
-        <md-card>
-          <md-card-header><md-card-title class="card-header">{{currentRoute | capitalize}}</md-card-title></md-card-header>
-          <md-card-content><router-outlet></router-outlet></md-card-content>
-        </md-card>
-      </div>
-    </md-sidenav-container>
+	 <md-card>
+      <router-outlet></router-outlet>
+    </md-card>
   `,
   styles: [`
+    .refresh {
+      border-radius: 50%;
+    }
     .sidenav {
       height: 100%;
       padding: 10px;
@@ -55,8 +65,6 @@ import { CognitoService } from './core/cognito.service';
       height: 100%;
     }
     .material-icons {
-      font-size: 32px;
-      padding: 0 6px;
       font-family: 'Material Icons';
     }
     .toolbar {
@@ -99,6 +107,10 @@ export class AppComponent implements OnInit {
   logout() {
     this.title = "Login"
     this.cognito.logout();
+  }
+
+  refresh() {
+    console.log("refresh");
   }
 
   ngOnInit() {

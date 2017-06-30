@@ -6,17 +6,12 @@ import { UnauthGuardService } from './core/unauth-guard.service';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: "full"
-  },
-  {
     path: 'login',
     loadChildren: 'app/login/login.module#LoginModule',
     canActivate: [UnauthGuardService]
   },
   {
-    path: 'private',
+    path: '',
     loadChildren: 'app/private/private.module#PrivateModule',
     canActivate: [AuthGuardService]
   }

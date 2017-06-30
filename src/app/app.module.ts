@@ -9,7 +9,8 @@ import {
   MdListModule,
   MdIconModule,
   MdButtonModule,
-  MdCardModule
+  MdCardModule,
+  MdMenuModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -36,6 +37,7 @@ import { CoreModule } from './core/core.module';
     MdIconModule,
     MdButtonModule,
     MdCardModule,
+    MdMenuModule,
     FlexLayoutModule,
     BrowserAnimationsModule
   ],
@@ -47,7 +49,8 @@ import { CoreModule } from './core/core.module';
     MdListModule,
     MdIconModule,
     MdButtonModule,
-    MdCardModule
+    MdCardModule,
+    MdMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
