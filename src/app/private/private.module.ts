@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MdIconModule, MdInputModule } from '@angular/material';
+import { MdIconModule, MdInputModule, MdSortModule } from '@angular/material';
 
 import { PrivateRoutingModule } from './private-routing.module';
 import { SearchComponent } from './search/search.component';
@@ -15,11 +15,13 @@ import { MainComponent } from './main/main.component';
     CommonModule,
     PrivateRoutingModule,
     MdIconModule,
-    MdInputModule
+    MdInputModule,
+    MdSortModule
   ],
   exports: [
     MdIconModule,
-    MdInputModule
+    MdInputModule,
+    MdSortModule
   ],
   declarations: [SearchComponent, EditComponent, ImportComponent, ExportComponent, MainComponent]
 })

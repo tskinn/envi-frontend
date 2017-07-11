@@ -16,23 +16,15 @@ import { CognitoService } from './core/cognito.service';
       <button md-icon-button *ngIf="loggedIn | async" (click)="refresh()">
         <md-icon>refresh</md-icon>
       </button>
-	   <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="loggedIn | async">
-        <md-icon>more_vert</md-icon>
-	   </button>
-		<md-menu #menu="mdMenu">
-        <button md-menu-item (click)="logout()">
-          <md-icon>exit_to_app</md-icon>
-          <span>Logout</span>
-        </button>
-        <button md-menu-item>
-          <md-icon>file_upload</md-icon>
-          <span>Import</span>
-        </button>
-        <button md-menu-item>
-          <md-icon>get_app</md-icon>
-          <span>Export</span>
-        </button>
-      </md-menu>
+      <button md-icon-button *ngIf="loggedIn | async">
+        <md-icon>file_upload</md-icon>
+      </button>
+      <button md-icon-button *ngIf="loggedIn | async">
+        <md-icon>get_app</md-icon>
+      </button>
+      <button md-button (click)="logout()" *ngIf="loggedIn | async">
+        <span>Logout</span>
+      </button>
     </md-toolbar>
 	 <md-card>
       <router-outlet></router-outlet>
