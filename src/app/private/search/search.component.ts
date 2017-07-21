@@ -6,10 +6,10 @@ import { DbItem } from '../../core/db-item';
   selector: 'app-search',
   template: `
     <md-input-container>
-      <input mdInput placeholder="search">
+      <input mdInput #listFilter (keyup)="o" placeholder="search">
     </md-input-container>
     <md-nav-list>
-      <a md-list-item *ngFor="let item of items" (click)="select(item)">
+      <a md-list-item *ngFor="let item of (items | ngFuse:listFilter.value:{keys: ['name', 'environment']})" (click)="select(item)">
         <h3 md-line>{{item.name}}</h3>
         <p md-line>{{item.environment}}</p>
       </a>
