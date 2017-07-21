@@ -8,16 +8,23 @@ import { DbItem } from '../../core/db-item';
     <md-input-container>
       <input mdInput placeholder="search">
     </md-input-container>
-    <table mdSort (mdSortChange)="sortData($event)">
+    <md-button-toggle-group #group="mdButtonToggleGroup">
+    <md-table #table [dataSource]="dataSource" mdSort (mdSortChange)="sortData($event)">
       <tr>
         <th md-sort-header="name">Name</th>
         <th md-sort-header="environment">Environment</th>
       </tr>
+
       <tr *ngFor="let item of items">
+        <md-button-toggle value="{{item.name}}">
         <td>{{item.name}}</td>
         <td>{{item.environment}}</td>
+        </md-button-toggle>
       </tr>
-    </table>
+
+    </md-table>
+    </md-button-toggle-group>
+    <div> {{group.value}}</div>
     <p>
       search Works!
     </p>
