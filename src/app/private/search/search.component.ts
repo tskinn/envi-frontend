@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Sort } from '@angular/material';
 import { DbItem } from '../../core/db-item';
 
@@ -8,28 +8,27 @@ import { DbItem } from '../../core/db-item';
     <md-input-container>
       <input mdInput placeholder="search">
     </md-input-container>
-    <md-button-toggle-group #group="mdButtonToggleGroup">
-    <md-table #table [dataSource]="dataSource" mdSort (mdSortChange)="sortData($event)">
-      <tr>
-        <th md-sort-header="name">Name</th>
-        <th md-sort-header="environment">Environment</th>
-      </tr>
-
-      <tr *ngFor="let item of items">
-        <md-button-toggle value="{{item.name}}">
-        <td>{{item.name}}</td>
-        <td>{{item.environment}}</td>
-        </md-button-toggle>
-      </tr>
-
-    </md-table>
-    </md-button-toggle-group>
-    <div> {{group.value}}</div>
+    <md-nav-list>
+      <a md-list-item *ngFor="let item of items" (click)="select(item)">
+        <h3 md-line>{{item.name}}</h3>
+        <p md-line>{{item.environment}}</p>
+      </a>
+    </md-nav-list>
     <p>
       search Works!
     </p>
   `,
-  styles: []
+  styles: [`
+  span {
+    position: relative;
+    right: -15px;
+    top: -20px;
+    padding-bottom: -10px;
+  }
+  .md-button-toggle {
+    line-height: 0px;
+  }
+`]
 })
 export class SearchComponent implements OnInit {
 
@@ -37,11 +36,15 @@ export class SearchComponent implements OnInit {
   items: DbItem[];
 
   @Output()
-  selectedItem: DbItem;
+  onSelect = new EventEmitter<DbItem>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  select(item: DbItem) {
+    this.onSelect.emit(item);
   }
 
   sortData(sort: Sort) {

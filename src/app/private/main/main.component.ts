@@ -8,20 +8,26 @@ import { DbItem } from '../../core/db-item';
     <p>
       main Works!
     </p>
-    <app-search [items]="items"></app-search>
+    <app-search (onSelect)="onSelect($event)" [items]="items"></app-search>
+    <p *ngIf="selected">Selected: {{selected.name}} Id: {{selected.id}} </p>
   `,
   styles: []
 })
 export class MainComponent implements OnInit {
   items: DbItem[];
+  selected: DbItem;
   constructor() {
-    this.items = [{ "name": "one", "environment": "production", "vars": "vars", "lock": 1 },
-    { "name": "two", "environment": "production", "vars": "vars", "lock": 1 },
-    { "name": "one", "environment": "staging", "vars": "vars", "lock": 1 },
-    { "name": "two", "environment": "staging", "vars": "vars", "lock": 1 }]
+    this.items = [
+      { "id": 1243, "name": "kms-object-reps", "environment": "production", "vars": { "DNS": "yes" }, "lock": 1 },
+      { "id": 1244, "name": "kms-object-reps", "environment": "staging", "vars": { "vars": "no" }, "lock": 1 },
+      { "id": 124213, "name": "kms-api-event-registration", "environment": "production", "vars": { "vars": "yes" }, "lock": 1 },
+      { "id": 12423, "name": "kms-api-event-registration", "environment": "staging", "vars": { "vars": "ok" }, "lock": 1 }]
   }
 
   ngOnInit() {
   }
 
+  onSelect(item: DbItem) {
+    this.selected = item;
+  }
 }

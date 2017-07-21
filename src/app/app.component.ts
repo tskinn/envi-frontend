@@ -86,6 +86,7 @@ export class AppComponent implements OnInit {
     this.loggedIn = cognito.isLoggedIn();
     var item: DbItem;
     item = {
+      "id": 123124412,
       "name": "omega",
       "environment": "staging",
       "lock": 1,
