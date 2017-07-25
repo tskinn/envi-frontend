@@ -46,10 +46,17 @@ export class DynamodbService {
     let params = {
       TableName: environment.tableName,
       Key: { id: dbItem.id },
-      UpdateExpression: "",
-      ConditionExpression: "",
-      ExpressionAttributeNames: { "": "" },
-      ExpressionAttributeValues: { "": "" }
+      UpdateExpression: "set #l = :l + :o #v = :v",
+      ConditionExpression: "#l = :l",
+      ExpressionAttributeNames: {
+        "#l": "lock",
+        "#v": "vars"
+      },
+      ExpressionAttributeValues: {
+        ":l": dbItem.lock,
+        ":o": 1,
+        ":v": dbItem.vars
+      }
     };
     let docClient = new DynamoDB.DocumentClient();
     var updateItem = Rx.Observable.bindNodeCallback(docClient.update);

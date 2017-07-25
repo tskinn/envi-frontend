@@ -51,9 +51,9 @@ export function appReducer(state: AppState, action: Action): AppState {
       return { items: { ...state.items, ...action.payload }, selected: state.selected };
     }
     case "ITEM_UPDATED": {
-      const items = { ...state.items };
-      items[action.payload.id] = action.payload;
-      return { items: { ...state.items, items }, selected: state.selected };
+      const updatedItems = state.items.filter(i => i.id != action.payload.id);
+      updatedItems.push(action.payload);
+      return { items: updatedItems, selected: state.selected };
     }
     case "VAR_UPDATED": {
       let updatedItem = state.items.find(item => item.id == action.payload.id)

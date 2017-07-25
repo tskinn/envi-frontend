@@ -12,7 +12,7 @@ import { State } from '../../core/model';
   template: `
   <div class="container" fxLayout="row" fxLayoutAline="center start">
     <app-search (onSelect)="onSelect($event)" [items]="items | async"></app-search>
-    <app-vars [item]="selected | async"></app-vars>
+    <app-vars [item]="selected | async" (onSave)="onSave($event)"></app-vars>
   </div>
   `,
   styles: []
@@ -26,6 +26,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSave(item: DbItem) {
+    console.log("saving " + item.name); // TODO change to UPDATE_ITEM once dynamodb conected
+    this.store.dispatch({ type: "ITEM_UPDATED", payload: item });
   }
 
   onSelect(item: DbItem) {

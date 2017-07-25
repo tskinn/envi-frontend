@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { DbItem, Var } from '../../core/db-item';
 
@@ -16,8 +16,7 @@ import { DbItem, Var } from '../../core/db-item';
       </md-input-container>
       <app-var fxLayout="row" *ngFor="let envVar of (original.vars | ngFuse:listFilter.value:{keys: ['key', 'value']})" [item]="envVar" (onEdit)=onEdit($event)></app-var>
     </md-card-content>
-    <button md-fab><md-icon>add</md-icon></button>
-    <button md-fab><md-icon>save</md-icon></button>
+    <button md-fab (click)="save()"><md-icon>save</md-icon></button>
   </md-card>
   `,
   styles: [`
@@ -32,17 +31,28 @@ export class VarsComponent implements OnInit {
   set item(item: DbItem) {
     this.original = item;
     this.copy = { ...item };
+    this.dirty = false;
   }
 
-  original: DbItem;
+  @Output()
+  onSave = new EventEmitter<DbItem>();
 
-  copy: DbItem;
+  original: DbItem;// TODO do we really need two versions? maybe not
+  copy: DbItem;    // 
+  dirty: boolean;  // should we really send out a save request?
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() { }
 
+  save() {
+    if (this.dirty)
+      this.onSave.emit(this.copy);
+  }
+
   onEdit({ old, fresh }) {
+    this.dirty = true; // TODO be a little more thorough with checking if values are different
     if (old == null) { // new key
       // only push
       this.copy.vars.push(fresh);

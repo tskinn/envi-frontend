@@ -32,7 +32,7 @@ export class CognitoService {
     return this.logger.asObservable();
   }
 
-  // taks a jwt token and creates a CognitoIdentityCredentials object and stores it
+  // takes a jwt token and creates a CognitoIdentityCredentials object and stores it
   buildCreds(jwtToken: string) {
     let url = 'cognito-idp.' + environment.region.toLowerCase() + '.amazonaws.com/' + environment.identityPoolId;
     let logins: CognitoIdentity.LoginsMap = {};
@@ -46,6 +46,7 @@ export class CognitoService {
     AWS.config.credentials = creds;
   }
 
+  // makes a necesary call to make sure everything is hunky dory
   primeThePump() {
     let sts = new STS();
     sts.getCallerIdentity(function(err, data) {
