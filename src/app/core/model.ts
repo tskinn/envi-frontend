@@ -12,31 +12,62 @@ import { DbItem } from './db-item';
 import { DynamodbService } from './dynamodb.service';
 import * as DynamoDB from 'aws-sdk/clients/dynamodb';
 
-export type AppState = { items: { [id: number]: DbItem } };
+export type AppState = {
+  items: DbItem[],
+  selected: DbItem
+};
 export type State = { app: AppState };
 
 export const initialState: State = {
   app: {
-    items: {}
+    items: [
+      {
+        "id": 1243,
+        "name": "kms-object-reps",
+        "environment": "production",
+        "vars": [
+          { "key": "dns", "value": "bad" },
+          { "key": "hello", "value": "world" },
+          { "key": "carrots", "value": "orange" },
+          { "key": "bananas", "value": "yellow" },
+          { "key": "apples", "value": "red" },
+          { "key": "dsn", "value": "database" },
+          { "key": "pineapple", "value": "i dont know" },
+          { "key": "mango", "value": "greenish redish" }
+        ],
+        "lock": 1
+      },
+      { "id": 1244, "name": "kms-object-reps", "environment": "staging", "vars": [{ "key": "vars", "value": "no" }], "lock": 1 },
+      { "id": 124213, "name": "kms-api-event-registration", "environment": "production", "vars": [{ "key": "vars", "value": "yes" }], "lock": 1 },
+      { "id": 12423, "name": "kms-api-event-registration", "environment": "staging", "vars": [{ "key": "vars", "value": "ok" }], "lock": 1 }
+    ],
+    selected: { "id": 12423, "name": "kms-api-event-registration", "environment": "staging", "vars": [{ "key": "vars", "value": "ok" }], "lock": 1 }
   }
 };
 
 export function appReducer(state: AppState, action: Action): AppState {
   switch (action.type) {
     case "ITEMS_UPDATED": {
-      return { ...state, ...action.payload };
+      return { items: { ...state.items, ...action.payload }, selected: state.selected };
     }
     case "ITEM_UPDATED": {
       const items = { ...state.items };
       items[action.payload.id] = action.payload;
-      return { ...state, items };
+      return { items: { ...state.items, items }, selected: state.selected };
     }
     case "VAR_UPDATED": {
-      const items = { ...state.items };
-      let updatedItem = items[action.payload.id]
-      updatedItem.vars[action.payload.key] = action.payload.value;
-      items[updatedItem.id] = updatedItem;
-      return { ...state, items };
+      let updatedItem = state.items.find(item => item.id == action.payload.id)
+      const items = state.items.filter(item => item.id !== action.payload.id) // get rid of item
+      let updatedVars = updatedItem.vars.filter(item => item.key !== action.payload.key) // get rid of var
+      updatedVars.push({ key: action.payload.key, value: action.payload.value }) // add new var
+      updatedItem.vars = updatedVars;
+      items.push(updatedItem)
+      /* updatedItem.vars[action.payload.key] = action.payload.value;
+       * items[updatedItem.id] = updatedItem;*/
+      return { items: items, selected: state.selected };
+    }
+    case "SELECT": {
+      return { items: state.items, selected: action.payload }
     }
     default: {
       return state;

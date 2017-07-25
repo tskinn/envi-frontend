@@ -5,7 +5,7 @@ import { DbItem } from './db-item';
 // actions
 export class ItemsUpdated implements Action {
   readonly type = "ITEMS_UPDATED";
-  constructor(public payload: { [id: number]: DbItem }) { }
+  constructor(public payload: DbItem[]) { }
 }
 export class ItemUpdated implements Action {
   readonly type = "ITEM_UPDATED";
@@ -21,11 +21,15 @@ export class ItemDeleted implements Action {
 }
 export class AllItemsGot implements Action {
   readonly type = "ALL_ITEMS_GOT";
-  constructor(public payload: { [id: number]: DbItem }) { }
+  constructor(public payload: DbItem[]) { }
 }
 export class AllItemsNotGot implements Action {
   readonly type = "ALL_ITEMS_NOT_GOT";
   constructor() { }
+}
+export class Select implements Action {
+  readonly type = "SELECT";
+  constructor(public payload: DbItem) { }
 }
 /* export type ItemsUpdated = { type: "ITEMS_UPDATED", payload: { [id: number]: DbItem } };
  * export type ItemUpdated = { type: "ITEM_UPDATED", payload: DbItem };
@@ -37,4 +41,5 @@ export type Action = ItemsUpdated
   | VarUpdated
   | ItemDeleted
   | AllItemsGot
-  | AllItemsNotGot;
+  | AllItemsNotGot
+  | Select;

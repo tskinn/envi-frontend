@@ -4,7 +4,8 @@ import { CognitoService } from '../../core/cognito.service';
 @Component({
   selector: 'app-login-container',
   template: `
-    <div class="container">
+<div class="container">
+  <md-card>
     <p>
       <md-input-container>
         <input mdInput placeholder="username">
@@ -14,12 +15,16 @@ import { CognitoService } from '../../core/cognito.service';
       <md-input-container>
         <input mdInput placeholder="password" type="password">
       </md-input-container>
-	 </p>
-	 <button md-raised-button (click)="login()">login</button>
-    </div>
+     </p>
+    <button md-raised-button (click)="login()">login</button>
+  </md-card>
+</div>
   `,
   styles: [`
     .container {
+      margin: 60px;
+    }
+    md-card {
       width: 240px;
       margin: auto;
     }

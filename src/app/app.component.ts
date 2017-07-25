@@ -26,11 +26,14 @@ import { CognitoService } from './core/cognito.service';
         <span>Logout</span>
       </button>
     </md-toolbar>
-	 <md-card>
-      <router-outlet></router-outlet>
-    </md-card>
+    <router-outlet></router-outlet>
   `,
   styles: [`
+    md-toolbar {
+      z-index: 3;
+      position: relative;
+      box-shadow: 0 3px 3px #999
+    }
     .refresh {
       border-radius: 50%;
     }
@@ -59,10 +62,6 @@ import { CognitoService } from './core/cognito.service';
     .material-icons {
       font-family: 'Material Icons';
     }
-    .toolbar {
-      position: relative;
-      z-index: 4;
-    }
     .spacer {
       flex: 1 1 auto;
     }
@@ -84,17 +83,6 @@ export class AppComponent implements OnInit {
 
   constructor(private cognito: CognitoService, private router: Router) {
     this.loggedIn = cognito.isLoggedIn();
-    var item: DbItem;
-    item = {
-      "id": 123124412,
-      "name": "omega",
-      "environment": "staging",
-      "lock": 1,
-      "vars": {
-        "DNS": "somedns"
-      }
-    }
-    console.log(item);
   }
 
   logout() {
@@ -117,5 +105,5 @@ export class AppComponent implements OnInit {
       console.log(item);
     })
   }
-
 }
+

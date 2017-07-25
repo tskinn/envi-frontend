@@ -1,33 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
 import { DbItem } from '../../core/db-item';
+import { State } from '../../core/model';
 
 @Component({
   selector: 'app-main',
   template: `
-    <p>
-      main Works!
-    </p>
-    <app-search (onSelect)="onSelect($event)" [items]="items"></app-search>
-    <p *ngIf="selected">Selected: {{selected.name}} Id: {{selected.id}} </p>
+  <div class="container" fxLayout="row" fxLayoutAline="center start">
+    <app-search (onSelect)="onSelect($event)" [items]="items | async"></app-search>
+    <app-vars [item]="selected | async"></app-vars>
+  </div>
   `,
   styles: []
 })
 export class MainComponent implements OnInit {
-  items: DbItem[];
-  selected: DbItem;
-  constructor() {
-    this.items = [
-      { "id": 1243, "name": "kms-object-reps", "environment": "production", "vars": { "DNS": "yes" }, "lock": 1 },
-      { "id": 1244, "name": "kms-object-reps", "environment": "staging", "vars": { "vars": "no" }, "lock": 1 },
-      { "id": 124213, "name": "kms-api-event-registration", "environment": "production", "vars": { "vars": "yes" }, "lock": 1 },
-      { "id": 12423, "name": "kms-api-event-registration", "environment": "staging", "vars": { "vars": "ok" }, "lock": 1 }]
+  items: Observable<DbItem[]>;
+  selected: Observable<DbItem>;
+  constructor(private store: Store<State>) {
+    this.items = store.select('app', 'items')
+    this.selected = store.select('app', 'selected')
   }
 
   ngOnInit() {
   }
 
   onSelect(item: DbItem) {
-    this.selected = item;
+    this.store.dispatch({ type: "SELECT", payload: item });
   }
 }
