@@ -14,14 +14,21 @@ import { DbItem, Var } from '../../core/db-item';
       <md-input-container>
         <input mdInput #listFilter (keyup)="o" placeholder="search">
       </md-input-container>
+      <md-nav-list dense>
       <app-var fxLayout="row" *ngFor="let envVar of (original.vars | ngFuse:listFilter.value:{keys: ['key', 'value']})" [item]="envVar" (onEdit)=onEdit($event)></app-var>
+      </md-nav-list>
     </md-card-content>
     <button md-fab (click)="save()"><md-icon>save</md-icon></button>
   </md-card>
   `,
   styles: [`
   md-card {
-    margin: 30px;
+    margin: 25px 25px 0px 0px;
+  }
+  button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
   }
 `]
 })

@@ -8,7 +8,7 @@ import { DbItem } from '../../core/db-item';
     <md-input-container>
       <input mdInput #listFilter (keyup)="o" placeholder="search">
     </md-input-container>
-    <md-nav-list>
+    <md-nav-list dense>
       <a md-list-item *ngFor="let item of (items | ngFuse:listFilter.value:{keys: ['name', 'environment']})" (click)="select(item)">
         <h3 md-line>{{item.name}}</h3>
         <p md-line>{{item.environment}}</p>
@@ -18,8 +18,8 @@ import { DbItem } from '../../core/db-item';
   `,
   styles: [`
   md-card {
-    margin: 30px;
-    width: 350px;
+    margin: 25px;
+    width: 450px;
   }
   span {
     position: relative;

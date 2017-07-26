@@ -10,7 +10,8 @@ import {
   MdIconModule,
   MdButtonModule,
   MdCardModule,
-  MdMenuModule
+  MdMenuModule,
+  MdDialogModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -19,6 +20,8 @@ import { AppComponent } from './app.component';
 
 /* Feature Modules */
 import { CoreModule } from './core/core.module';
+
+import { SuperSearchComponent } from './private/super-search/super-search.component';
 
 
 @NgModule({

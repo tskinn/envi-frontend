@@ -5,14 +5,25 @@ import { Var } from '../../core/db-item';
 @Component({
   selector: 'app-var',
   template: `
-  <md-input-container>
+  <md-list-item fxFlex="0 1 auto" (click)="focus($event, key)">
     <input mdInput value="{{_item.key}}" onClick="this.select()" #key (keyup)="editKey(key.value)">
-  </md-input-container>
-  <md-input-container>
+  </md-list-item>
+  <md-icon fxFlex="0 1 auto" class="hello">drag_handle</md-icon>
+  <md-list-item fxFlex="1 1 100%" (click)="focus($event, value)">
     <input mdInput value="{{_item.value}}" onClick="this.select()" #value (keyup)="editValue(value.value)">
-  </md-input-container>
+  </md-list-item>
+  <md-list-item fxFlex="0 1 auto">
+    <md-icon>delete</md-icon>
+  </md-list-item>
   `,
-  styles: []
+  styles: [`
+    input {
+      cursor: pointer;
+    }
+    .hello {
+      margin: 8px 5px;
+    }
+  `]
 })
 export class VarComponent implements OnInit {
 
@@ -30,6 +41,10 @@ export class VarComponent implements OnInit {
   onEdit = new EventEmitter<{ old: Var, fresh: Var }>();
 
   constructor() { }
+
+  focus(e, el) {
+    el.select();
+  }
 
   ngOnInit() {
   }

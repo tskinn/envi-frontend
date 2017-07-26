@@ -4,6 +4,9 @@ import { CognitoService } from '../../core/cognito.service';
 @Component({
   selector: 'app-login-container',
   template: `
+<md-toolbar color="primary" class="toolbar">
+  <span>Envi</span>
+</md-toolbar>
 <div class="container">
   <md-card>
     <p>
@@ -21,6 +24,11 @@ import { CognitoService } from '../../core/cognito.service';
 </div>
   `,
   styles: [`
+    md-toolbar {
+      z-index: 3;
+      position: relative;
+      box-shadow: 0 3px 3px #999;
+    }
     .container {
       margin: 60px;
     }
