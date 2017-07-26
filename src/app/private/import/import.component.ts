@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { DynamodbService } from '../../core/dynamodb.service';
 
+import { MdDialogRef } from '@angular/material';
+
 
 @Component({
   selector: 'app-import',
@@ -20,9 +22,12 @@ import { DynamodbService } from '../../core/dynamodb.service';
 })
 export class ImportComponent implements OnInit {
 
-  constructor(private dbService: DynamodbService) { }
+  constructor(private dbService: DynamodbService, public dialogRef: MdDialogRef<ImportComponent>) { }
 
   ngOnInit() {
   }
 
+  close() {
+    this.dialogRef.close();
+  }
 }

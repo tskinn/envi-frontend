@@ -40,7 +40,7 @@ import { SuperSearchComponent } from './super-search/super-search.component';
     MdListModule,
     MdDialogModule
   ],
-  entryComponents: [SuperSearchComponent],
+  entryComponents: [SuperSearchComponent, ImportComponent, ExportComponent],
   declarations: [SearchComponent, EditComponent, ImportComponent, ExportComponent, MainComponent, VarsComponent, VarComponent, SuperSearchComponent]
 })
 export class PrivateModule { }

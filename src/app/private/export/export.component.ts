@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MdDialogRef } from '@angular/material';
+
 @Component({
   selector: 'app-export',
   template: `
@@ -11,9 +13,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExportComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MdDialogRef<ExportComponent>) { }
 
   ngOnInit() {
+  }
+
+  close() {
+    this.dialogRef.close("we're closed");
   }
 
 }

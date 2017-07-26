@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Router, NavigationStart, Event } from '@angular/router';
 
-import 'rxjs/add/operator/filter';
-
-import { DbItem } from './core/db-item';
 import { CognitoService } from './core/cognito.service';
 
 @Component({
@@ -16,7 +11,7 @@ import { CognitoService } from './core/cognito.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private cognito: CognitoService, private router: Router) {
+  constructor(private cognito: CognitoService) {
 
   }
 

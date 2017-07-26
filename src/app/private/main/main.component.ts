@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { SuperSearchComponent } from '../super-search/super-search.component';
+import { ExportComponent } from '../export/export.component';
+import { ImportComponent } from '../import/import.component';
 import { CognitoService } from '../../core/cognito.service';
 import { DbItem } from '../../core/db-item';
 import { State } from '../../core/model';
@@ -20,10 +24,10 @@ import { State } from '../../core/model';
   <button md-icon-button  (click)="refresh()">
     <md-icon>refresh</md-icon>
   </button>
-  <button md-icon-button >
+  <button md-icon-button (click)="openImport()">
     <md-icon>file_upload</md-icon>
   </button>
-  <button md-icon-button >
+  <button md-icon-button (click)="openExport()">
     <md-icon>get_app</md-icon>
   </button>
   <button md-button (click)="logout()" >
@@ -52,7 +56,7 @@ md-toolbar {
 export class MainComponent implements OnInit {
   items: Observable<DbItem[]>;
   selected: Observable<DbItem>;
-  constructor(private store: Store<State>, private cognito: CognitoService) {
+  constructor(private store: Store<State>, private cognito: CognitoService, public dialog: MdDialog) {
     this.items = store.select('app', 'items')
     this.selected = store.select('app', 'selected')
   }
@@ -70,6 +74,21 @@ export class MainComponent implements OnInit {
 
   openSearch() {
     console.log("opening search");
+    this.dialog.open(SuperSearchComponent).afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  openExport() {
+    this.dialog.open(ExportComponent).afterClosed().subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  openImport() {
+    this.dialog.open(ImportComponent).afterClosed().subscribe(result => {
+      console.log(result);
+    })
   }
 
   onSave(item: DbItem) {
