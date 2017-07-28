@@ -1,5 +1,5 @@
 export interface DbItem {
-  id: number;
+  id: string;
   vars: Var[];
   name: string;
   environment: string;

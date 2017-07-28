@@ -3,19 +3,7 @@ import { DbItem } from '../../core/db-item';
 
 @Component({
   selector: 'app-search',
-  template: `
-  <md-card>
-    <md-input-container>
-      <input mdInput #listFilter (keyup)="o" placeholder="search">
-    </md-input-container>
-    <md-nav-list dense>
-      <a md-list-item *ngFor="let item of (items | ngFuse:listFilter.value:{keys: ['name', 'environment']})" (click)="select(item)">
-        <h3 md-line>{{item.name}}</h3>
-        <p md-line>{{item.environment}}</p>
-      </a>
-    </md-nav-list>
-  </md-card>
-  `,
+  templateUrl: 'search.component.html',
   styles: [`
   md-card {
     margin: 25px;
