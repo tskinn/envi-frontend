@@ -13,11 +13,11 @@ import { State } from '../../core/model';
   templateUrl: 'super-search.component.html',
   styles: [`
 .super-search-container {
-  min-width: 400px;
+  width: 600px;
 }
 md-nav-list {
 overflow: auto;
-max-height: 400px;
+height: 500px;
 }
 `]
 })
@@ -51,6 +51,7 @@ export class SuperSearchComponent implements OnInit {
   }
 }
 
+// TOOD make a pipe to clean up the html
 export class FlatVar {
   v: Var;
   name: string;
