@@ -1,0 +1,23 @@
+<md-toolbar color="primary" class="toolbar">
+  <span>Envi</span>
+  <span class="spacer"></span>
+  <button md-icon-button (click)="openSearch()">
+    <md-icon>search</md-icon>
+  </button>
+  <button md-icon-button  (click)="refresh()">
+    <md-icon>refresh</md-icon>
+  </button>
+  <button md-icon-button (click)="openImport()">
+    <md-icon>file_upload</md-icon>
+  </button>
+  <button md-icon-button (click)="openExport()">
+    <md-icon>get_app</md-icon>
+  </button>
+  <button md-button (click)="logout()" >
+    <span>Logout</span>
+  </button>
+</md-toolbar>
+<div class="container" fxLayout="row" fxLayoutAline="center start">
+  <app-search fxFlex="0 1 auto" (onSelect)="onSelect($event)" [items]="items | async"></app-search>
+  <app-vars fxFlex="1 1 100%" [item]="selected | async" (onSave)="onSave($event)"></app-vars>
+</div>

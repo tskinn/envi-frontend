@@ -29,7 +29,7 @@ export class AllItemsNotGot implements Action {
 }
 export class Select implements Action {
   readonly type = "SELECT";
-  constructor(public payload: DbItem) { }
+  constructor(public payload: { id: string }) { }
 }
 /* export type ItemsUpdated = { type: "ITEMS_UPDATED", payload: { [id: string]: DbItem } };
  * export type ItemUpdated = { type: "ITEM_UPDATED", payload: DbItem };

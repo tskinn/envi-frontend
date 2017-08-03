@@ -14,31 +14,7 @@ import { State } from '../../core/model';
 
 @Component({
   selector: 'app-main',
-  template: `
-<md-toolbar color="primary" class="toolbar">
-  <span>Envi</span>
-  <span class="spacer"></span>
-  <button md-icon-button (click)="openSearch()">
-    <md-icon>search</md-icon>
-  </button>
-  <button md-icon-button  (click)="refresh()">
-    <md-icon>refresh</md-icon>
-  </button>
-  <button md-icon-button (click)="openImport()">
-    <md-icon>file_upload</md-icon>
-  </button>
-  <button md-icon-button (click)="openExport()">
-    <md-icon>get_app</md-icon>
-  </button>
-  <button md-button (click)="logout()" >
-    <span>Logout</span>
-  </button>
-</md-toolbar>
-<div class="container" fxLayout="row" fxLayoutAline="center start">
-  <app-search fxFlex="0 1 auto" (onSelect)="onSelect($event)" [items]="items | async"></app-search>
-  <app-vars fxFlex="1 1 100%" [item]="selected | async" (onSave)="onSave($event)"></app-vars>
-</div>
-  `,
+  templateUrl: 'main.component.html',
   styles: [`
 md-toolbar {
   z-index: 3;
@@ -54,11 +30,13 @@ md-toolbar {
 `]
 })
 export class MainComponent implements OnInit {
+  items_: DbItem[];
   items: Observable<DbItem[]>;
   selected: Observable<DbItem>;
   constructor(private store: Store<State>, private cognito: CognitoService, public dialog: MdDialog) {
     this.items = store.select('app', 'items')
     this.selected = store.select('app', 'selected')
+    this.items.subscribe(items => this.items_ = items);
   }
 
   ngOnInit() {

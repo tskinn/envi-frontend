@@ -67,7 +67,8 @@ export function appReducer(state: AppState, action: Action): AppState {
       return { items: items, selected: state.selected };
     }
     case "SELECT": {
-      return { items: state.items, selected: action.payload }
+      let found = state.items.find(item => item.id == action.payload.id);
+      return { items: state.items, selected: found }
     }
     default: {
       return state;

@@ -16,18 +16,20 @@ import { State } from '../../core/model';
   width: 600px;
 }
 md-nav-list {
-overflow: auto;
-height: 500px;
+  overflow: auto;
+  height: 500px;
 }
 `]
 })
 export class SuperSearchComponent implements OnInit {
 
+  items: DbItem[];
   vars: Observable<FlatVar[]>;
   selected: FlatVar;
 
   constructor(public dialogRef: MdDialogRef<SuperSearchComponent>,
     private store: Store<State>) {
+    store.select('app', 'items').subscribe(items => this.items = items);
     this.vars = store.select('app', 'items').map((dbItems: DbItem[]) => {
       let vars: FlatVar[] = [];
       dbItems.forEach(item => {
@@ -46,8 +48,8 @@ export class SuperSearchComponent implements OnInit {
     this.dialogRef.close(this.selected);
   }
 
-  select(dbItem: FlatVar) {
-    this.selected = dbItem;
+  select(dbItem: any) {
+    this.store.dispatch({ type: "SELECT", payload: { id: dbItem.item.id } })
   }
 }
 

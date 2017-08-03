@@ -3,7 +3,7 @@
         <input mdInput placeholder="search" #listFilter (keyup)="o">
     </md-input-container>
     <md-nav-list dense>
-        <a md-list-item fxLayout="row" *ngFor="let item of (vars | async | ngFuse:listFilter.value:{keys: ['v.key', 'v.value', 'name', 'environment'], includeMatches: true})" (click)="select(item.item)">
+        <a md-list-item fxLayout="row" *ngFor="let item of (vars | async | ngFuse:listFilter.value:{keys: ['v.key', 'v.value', 'name', 'environment'], includeMatches: true})" (click)="select(item)">
             <div *ngIf="listFilter.value">
                 <h4 md-line>{{item.item.v.key}}:{{item.item.v.value}}</h4>
                 <p md-line>{{item.item.name}}:{{item.item.environment}}</p>

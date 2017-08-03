@@ -7,18 +7,25 @@ import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-import',
-  template: `
-    <p>
-      import Works!
-    </p>
-    <md-input-container>
-      <input mdInput>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput>
-    </md-input-container>
-  `,
-  styles: []
+  templateUrl: 'import.component.html',
+  styles: [`
+div {
+#  width: 500px;
+#  height: 600px;
+}
+input {
+#width: 100%;
+width: 300px;
+}
+textarea {
+#  width: 500px;
+  width: 100%;
+  height: 350px;
+}
+button {
+#  width: 100%;
+}
+`]
 })
 export class ImportComponent implements OnInit {
 
