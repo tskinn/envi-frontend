@@ -22,7 +22,7 @@ export const initialState: State = {
   app: {
     items: [
       {
-        "id": 1243,
+        "id": "1243",
         "name": "kms-object-reps",
         "environment": "production",
         "vars": [
@@ -37,11 +37,11 @@ export const initialState: State = {
         ],
         "lock": 1
       },
-      { "id": 1244, "name": "kms-object-reps", "environment": "staging", "vars": [{ "key": "vars", "value": "no" }], "lock": 1 },
-      { "id": 124213, "name": "kms-api-event-registration", "environment": "production", "vars": [{ "key": "vars", "value": "yes" }], "lock": 1 },
-      { "id": 12423, "name": "kms-api-event-registration", "environment": "staging", "vars": [{ "key": "vars", "value": "ok" }], "lock": 1 }
+      { "id": "1244", "name": "kms-object-reps", "environment": "staging", "vars": [{ "key": "vars", "value": "no" }], "lock": 1 },
+      { "id": "124213", "name": "kms-api-event-registration", "environment": "production", "vars": [{ "key": "vars", "value": "yes" }], "lock": 1 },
+      { "id": "12423", "name": "kms-api-event-registration", "environment": "staging", "vars": [{ "key": "vars", "value": "ok" }], "lock": 1 }
     ],
-    selected: { "id": 12423, "name": "kms-api-event-registration", "environment": "staging", "vars": [{ "key": "vars", "value": "ok" }], "lock": 1 }
+    selected: { "id": "12423", "name": "kms-api-event-registration", "environment": "staging", "vars": [{ "key": "vars", "value": "ok" }], "lock": 1 }
   }
 };
 
@@ -57,8 +57,8 @@ export function appReducer(state: AppState, action: Action): AppState {
     }
     case "VAR_UPDATED": {
       let updatedItem = state.items.find(item => item.id == action.payload.id)
-      const items = state.items.filter(item => item.id !== action.payload.id) // get rid of item
-      let updatedVars = updatedItem.vars.filter(item => item.key !== action.payload.key) // get rid of var
+      const items = state.items.filter(item => item.id != action.payload.id) // get rid of item
+      let updatedVars = updatedItem.vars.filter(item => item.key != action.payload.key) // get rid of var
       updatedVars.push({ key: action.payload.key, value: action.payload.value }) // add new var
       updatedItem.vars = updatedVars;
       items.push(updatedItem)

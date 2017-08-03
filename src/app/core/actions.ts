@@ -13,11 +13,11 @@ export class ItemUpdated implements Action {
 }
 export class VarUpdated implements Action {
   readonly type = "VAR_UPDATED";
-  constructor(public payload: { id: number, key: string, value: string }) { }
+  constructor(public payload: { id: string, key: string, value: string }) { }
 }
 export class ItemDeleted implements Action {
   readonly type = "ITEM_DELETED";
-  constructor(public payload: { id: number }) { }
+  constructor(public payload: { id: string }) { }
 }
 export class AllItemsGot implements Action {
   readonly type = "ALL_ITEMS_GOT";
@@ -31,10 +31,10 @@ export class Select implements Action {
   readonly type = "SELECT";
   constructor(public payload: DbItem) { }
 }
-/* export type ItemsUpdated = { type: "ITEMS_UPDATED", payload: { [id: number]: DbItem } };
+/* export type ItemsUpdated = { type: "ITEMS_UPDATED", payload: { [id: string]: DbItem } };
  * export type ItemUpdated = { type: "ITEM_UPDATED", payload: DbItem };
- * export type VarUpdated = { type: "VAR_UPDATED", payload: { id: number, key: string, value: string } };
- * export type DeleteItem = { type: "DELETE_ITEM", payload: { id: number } };*/
+ * export type VarUpdated = { type: "VAR_UPDATED", payload: { id: string, key: string, value: string } };
+ * export type DeleteItem = { type: "DELETE_ITEM", payload: { id: string } };*/
 
 export type Action = ItemsUpdated
   | ItemUpdated
