@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  identityPoolId: "",
+  clientId: "",
+  region: "",
+  tableName: "",
+  sts_endpoint: ""
 };

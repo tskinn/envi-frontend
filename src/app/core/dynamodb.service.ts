@@ -14,9 +14,9 @@ export class DynamodbService {
 
   public writeDbItem(item: DbItem): Observable<DynamoDB.DocumentClient.PutItemOutput> {
     console.log("DynamodbService: Writing item: " + item);
-    var DDB = new DynamoDB.DocumentClient();
+    const DDB = new DynamoDB.DocumentClient();
     // Write the item to the table
-    let params = {
+    const params = {
       TableName: environment.tableName,
       Item: {
         id: item.id.toString(),
@@ -26,24 +26,24 @@ export class DynamodbService {
         vars: item.vars
       }
     };
-    var putItem = Rx.Observable.bindNodeCallback(DDB.put);
+    const putItem = Rx.Observable.bindNodeCallback(DDB.put);
     return putItem(params);
   }
 
   public deleteDbItem(id: number): Observable<DynamoDB.DocumentClient.DeleteItemOutput> {
-    let params = {
+    const params = {
       TableName: environment.tableName,
       Key: {
         id: id
       }
     };
-    var DDB = new DynamoDB.DocumentClient();
-    var deleteItem = Rx.Observable.bindNodeCallback(DDB.delete);
+    const DDB = new DynamoDB.DocumentClient();
+    const deleteItem = Rx.Observable.bindNodeCallback(DDB.delete);
     return deleteItem(params);
   }
 
   public updateDbItem(dbItem: DbItem): Observable<DynamoDB.DocumentClient.UpdateItemOutput> {
-    let params = {
+    const params = {
       TableName: environment.tableName,
       Key: { id: dbItem.id },
       UpdateExpression: "set #l = :l + :o #v = :v",
@@ -58,17 +58,17 @@ export class DynamodbService {
         ":v": dbItem.vars
       }
     };
-    let docClient = new DynamoDB.DocumentClient();
-    var updateItem = Rx.Observable.bindNodeCallback(docClient.update);
+    const docClient = new DynamoDB.DocumentClient();
+    const updateItem = Rx.Observable.bindNodeCallback(docClient.update);
     return updateItem(params);
   }
 
   public getAllItems(): Observable<DynamoDB.DocumentClient.ScanOutput> {
-    let params = {
+    const params = {
       TableName: environment.tableName
     }
-    let docClient = new DynamoDB.DocumentClient();
-    var scan = Rx.Observable.bindNodeCallback(docClient.scan);
+    const docClient = new DynamoDB.DocumentClient();
+    const scan = Rx.Observable.bindNodeCallback(docClient.scan);
     return scan(params);
   }
 }

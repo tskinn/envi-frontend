@@ -106,7 +106,7 @@ export class ItemsEffects {
   @Effect() getAllItems = this.actions.ofType("GET_ALL_ITEMS")
     .switchMap(() => this.dynamo.getAllItems()
       .map((resp: DynamoDB.DocumentClient.ScanOutput) => {
-        resp.Items;
+        return resp.Items;
       })
       .catch(() => Observable.of({ type: "ALL_ITEMS_NOT_GOT" }))
     );

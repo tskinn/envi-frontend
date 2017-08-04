@@ -8,5 +8,6 @@ export const environment = {
   identityPoolId: "",
   clientId: "",
   region: "",
-  tableName: ""
+  tableName: "",
+  sts_endpoint: ""
 };
