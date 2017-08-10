@@ -28,9 +28,9 @@ export class VarsComponent implements OnInit {
   @Output()
   onSave = new EventEmitter<DbItem>();
 
-  original: DbItem;// TODO do we really need two versions? maybe not
-  copy: DbItem;    // 
-  dirty: boolean;  // should we really send out a save request?
+  original: DbItem; // TODO do we really need two versions? maybe not
+  copy: DbItem;     //
+  dirty: boolean;   // should we really send out a save request?
 
   constructor() {
   }

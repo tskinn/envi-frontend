@@ -19,5 +19,5 @@
 </md-toolbar>
 <div class="container" fxLayout="row" fxLayoutAline="center start">
   <app-search fxFlex="0 1 auto" (onSelect)="onSelect($event)" [items]="items | async"></app-search>
-  <app-vars fxFlex="1 1 100%" [item]="selected | async" (onSave)="onSave($event)"></app-vars>
+  <app-vars fxFlex="1 1 100%" [item]="selectedItem | async" (onSave)="onSave($event)"></app-vars>
 </div>

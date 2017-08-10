@@ -8,9 +8,11 @@ import 'rxjs/add/operator/map';
 import { SuperSearchComponent } from '../super-search/super-search.component';
 import { ExportComponent } from '../export/export.component';
 import { ImportComponent } from '../import/import.component';
-import { CognitoService } from '../../core/cognito.service';
+import { LoginService } from '../../core/login.service';
 import { DbItem } from '../../core/db-item';
-import { State } from '../../core/model';
+import { State } from '../../core/state/model';
+import { getItems, getSelected } from '../../core/state/reducer';
+import * as Acts from '../../core/state/actions';
 
 @Component({
   selector: 'app-main',
@@ -30,28 +32,31 @@ md-toolbar {
 `]
 })
 export class MainComponent implements OnInit {
-  items_: DbItem[];
+  currentItems: DbItem[];
   items: Observable<DbItem[]>;
-  selected: Observable<DbItem>;
-  constructor(private store: Store<State>, private cognito: CognitoService, public dialog: MdDialog) {
-    this.items = store.select('app', 'items')
-    this.selected = store.select('app', 'selected')
-    this.items.subscribe(items => this.items_ = items);
+  selectedItem: Observable<DbItem>;
+  constructor(private store: Store<State>, private loginService: LoginService, public dialog: MdDialog) {
+    this.items = store.select(getItems);
+    this.items.subscribe(items => this.currentItems = items);
+    this.selectedItem = store.select(getSelected).map(id => {
+      return this.currentItems.find(item => item.id == id);
+    })
+    this.store.dispatch({type: Acts.SELECTED, payload: '12334'});
   }
 
   ngOnInit() {
   }
 
   logout() {
-    this.cognito.logout();
+    this.loginService.logout();
   }
 
   refresh() {
-    console.log("refresh");
+    console.log('refresh');
   }
 
   openSearch() {
-    console.log("opening search");
+    console.log('opening search');
     this.dialog.open(SuperSearchComponent).afterClosed().subscribe(result => {
       console.log(result);
     })
@@ -70,11 +75,11 @@ export class MainComponent implements OnInit {
   }
 
   onSave(item: DbItem) {
-    console.log("saving " + item.name); // TODO change to UPDATE_ITEM once dynamodb conected
-    this.store.dispatch({ type: "ITEM_UPDATED", payload: item });
+    console.log('saving ' + item.name); // TODO change to UPDATE_ITEM once dynamodb conected
+    this.store.dispatch({ type: Acts.ITEM_UPDATED, payload: item });
   }
 
-  onSelect(item: DbItem) {
-    this.store.dispatch({ type: "SELECT", payload: item });
+  onSelect(id: string) {
+    this.store.dispatch({ type: Acts.SELECTED, payload: id });
   }
 }

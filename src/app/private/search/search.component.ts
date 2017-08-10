@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   items: DbItem[];
 
   @Output()
-  onSelect = new EventEmitter<DbItem>();
+  onSelect = new EventEmitter<string>();
 
   constructor() { }
 
@@ -34,6 +34,6 @@ export class SearchComponent implements OnInit {
   }
 
   select(item: DbItem) {
-    this.onSelect.emit(item);
+    this.onSelect.emit(item.id);
   }
 }

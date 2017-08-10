@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import {
   MdToolbarModule, MdDialogModule, MdIconModule, MdInputModule, MdButtonModule, MdButtonToggleModule, MdCardModule, MdListModule
 } from '@angular/material';
@@ -20,6 +21,7 @@ import { SuperSearchComponent } from './super-search/super-search.component';
 @NgModule({
   imports: [
     CommonModule,
+    HttpModule,
     PrivateRoutingModule,
     MdIconModule,
     MdInputModule,

@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/map'
 
 import { DbItem, Var } from '../../core/db-item';
-import { State } from '../../core/model';
+import { State } from '../../core/state/model';
+import { getItems } from '../../core/state/reducer';
 
 @Component({
   selector: 'app-super-search',
@@ -18,6 +19,7 @@ import { State } from '../../core/model';
 md-nav-list {
   overflow: auto;
   height: 500px;
+  width: 100%;
 }
 `]
 })
@@ -29,8 +31,8 @@ export class SuperSearchComponent implements OnInit {
 
   constructor(public dialogRef: MdDialogRef<SuperSearchComponent>,
     private store: Store<State>) {
-    store.select('app', 'items').subscribe(items => this.items = items);
-    this.vars = store.select('app', 'items').map((dbItems: DbItem[]) => {
+    store.select(getItems).subscribe(items => this.items = items);
+    this.vars = store.select(getItems).map((dbItems: DbItem[]) => {
       let vars: FlatVar[] = [];
       dbItems.forEach(item => {
         item.vars.forEach(v => {
@@ -49,7 +51,7 @@ export class SuperSearchComponent implements OnInit {
   }
 
   select(dbItem: any) {
-    this.store.dispatch({ type: "SELECT", payload: { id: dbItem.item.id } })
+    this.store.dispatch({ type: 'SELECT', payload: { id: dbItem.item.id } })
   }
 }
 

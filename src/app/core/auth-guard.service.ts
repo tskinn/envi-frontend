@@ -4,18 +4,19 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State } from './state/model';
 import { CognitoService } from './cognito.service';
+import { LoginService } from './login.service';
+import { getLoggedIn } from './state/reducer';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
   isLoggedIn: boolean
 
-  constructor(private cognitoService: CognitoService, private router: Router) {
-    let obs = cognitoService.isLoggedIn();
-    obs.subscribe(value => {
-      this.isLoggedIn = value;
-    })
+  constructor(private store: Store<State>, private router: Router) {
+    store.select(getLoggedIn).subscribe(bo => this.isLoggedIn = bo)
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -30,8 +31,7 @@ export class AuthGuardService implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-
-    if (this.cognitoService.isLoggedIn()) { return true; }
+    if (this.isLoggedIn) { return true; }
     // TODO do something else here with url redirect
     this.router.navigate(['/login']);
     return false;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CognitoService } from '../../core/cognito.service';
+import { LoginService } from '../../core/login.service';
 
 @Component({
   selector: 'app-login-container',
@@ -50,13 +50,13 @@ import { CognitoService } from '../../core/cognito.service';
 })
 export class LoginContainerComponent implements OnInit {
 
-  constructor(private cognito: CognitoService) { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
     console.log("logincontainer init...");
   }
 
   login() {
-    this.cognito.login();
+    this.loginService.login();
   }
 }

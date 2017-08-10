@@ -92,6 +92,9 @@ export class CognitoService {
         console.log('authentication failed: ' + err)
         // TODO do something!
       },
+      newPasswordRequired: function(userAttributes, requiredAttributes) {
+        // TODO really should have this crap
+      }
     });
   }
 
