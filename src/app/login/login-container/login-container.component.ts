@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../core/auth.service';
 import { LoginService } from '../../core/login.service';
 
 @Component({
@@ -50,10 +52,14 @@ import { LoginService } from '../../core/login.service';
 })
 export class LoginContainerComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private route: ActivatedRoute,
+    private authService: AuthService, private loginService: LoginService) { }
 
   ngOnInit() {
     console.log("logincontainer init...");
+    this.route.fragment.subscribe((frag) => {
+
+    });
   }
 
   login() {

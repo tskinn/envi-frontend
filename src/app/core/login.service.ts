@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { OAuthService } from 'angular-oauth2-oidc';
@@ -10,23 +11,7 @@ import * as Acts from './state/actions';
 @Injectable()
 export class LoginService {
 
-  constructor(private oauthService: OAuthService, private store: Store<State>) {
-    this.oauthService.redirectUri = window.location.origin + '/login';
-    this.oauthService.clientId = environment.clientId;
-    this.oauthService.scope = environment.scope;
-    this.oauthService.oidc = true;
-    this.oauthService.issuer = environment.issuer;
-    this.oauthService.loadDiscoveryDocument().then(() => {
-      this.oauthService.tryLogin({
-        onTokenReceived: context => {
-          console.log("hello token");
-          console.log(context);
-        },
-        validationHanlder: context => {
-          console.log(context);
-        }
-      });
-    })
+  constructor(private oauthService: OAuthService, private store: Store<State>, private router: Router) {
   }
 
 
@@ -41,11 +26,11 @@ export class LoginService {
   }
 
   isLoggedIn() {
-    
   }
 
   logout() {
     this.oauthService.logOut();
+    this.router.navigate(['/login']);
   }
 
 }

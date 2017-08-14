@@ -15,14 +15,15 @@ import { AuthGuardService } from './auth-guard.service';
 import { UnauthGuardService } from './unauth-guard.service';
 import { initialState } from './state/model';
 import { reducer } from './state/reducer';
-import { ItemsEffects } from './state/effects'
+import { ItemsEffects } from './state/effects';
+import { AuthService } from './auth.service'
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
     MdInputModule,
-    StoreModule.forRoot({ app: reducer }, {initialState}),
+    StoreModule.forRoot({ app: reducer }, { initialState }),
     EffectsModule.forRoot([ItemsEffects]),
     OAuthModule.forRoot()
   ],
@@ -34,7 +35,8 @@ import { ItemsEffects } from './state/effects'
     DynamodbService,
     AuthGuardService,
     UnauthGuardService,
-    ItemsEffects
+    ItemsEffects,
+    AuthService
   ],
   exports: []
 })

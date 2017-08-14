@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -16,6 +17,19 @@ import * as Acts from './actions';
 
 @Injectable()
 export class ItemsEffects {
+
+  // @Effect() login = this.actions.ofType(Acts.LOGGED_IN)
+  //   .map(action => {
+  //     console.log("Logging in effect");
+  //     this.router.navigate(['']);
+  //     return action;
+  //   })
+
+  // @Effect() logout = this.actions.ofType(Acts.LOGGED_OUT)
+  //   .map(action => {
+  //     this.router.navigate(['login']);
+  //     return action;
+  //   })
 
   @Effect() updateItem = this.actions.ofType(Acts.UPDATE_ITEM)
     .switchMap(action => this.dynamo.updateDbItem((action as any).payload)
@@ -35,20 +49,23 @@ export class ItemsEffects {
 
   @Effect() deleteItem = this.actions.ofType(Acts.DELETE_ITEM)
     .switchMap(action => this.dynamo.deleteDbItem((action as any).payload.id)
-               .map((resp: DynamoDB.DocumentClient.DeleteItemOutput) => {
-                 const id = resp.Attributes['id'];
-                 return { type: Acts.ITEM_DELETED, payload: id};
-               })
-               .catch(() => Observable.of({ type: Acts.ITEM_NOT_DELETED}))
-                 );
+      .map((resp: DynamoDB.DocumentClient.DeleteItemOutput) => {
+        const id = resp.Attributes['id'];
+        return { type: Acts.ITEM_DELETED, payload: id };
+      })
+      .catch(() => Observable.of({ type: Acts.ITEM_NOT_DELETED }))
+    );
   @Effect() getAllItems = this.actions.ofType(Acts.GET_ALL_ITEMS)
     .switchMap(() => this.dynamo.getAllItems()
-               .map((resp: DynamoDB.DocumentClient.ScanOutput) => {
-                 // TODO does scanoutput really map to dbitem ok?
-                 return { type: Acts.ALL_ITEMS_GOT, payload: resp.Items }
-               })
-               .catch(() => Observable.of({ type: Acts.ALL_ITEMS_NOT_GOT}))
-                 );
+      .map((resp: DynamoDB.DocumentClient.ScanOutput) => {
+        // TODO does scanoutput really map to dbitem ok?
+        return { type: Acts.ALL_ITEMS_GOT, payload: resp.Items }
+      })
+      .catch(() => Observable.of({ type: Acts.ALL_ITEMS_NOT_GOT }))
+    );
 
-  constructor(private actions: Actions, private store: Store<State>, private dynamo: DynamodbService) { }
+  constructor(private router: Router,
+    private actions: Actions,
+    private store: Store<State>,
+    private dynamo: DynamodbService) { }
 }

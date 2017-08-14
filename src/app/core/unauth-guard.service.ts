@@ -4,28 +4,21 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { CognitoService } from './cognito.service';
 import { AuthGuardService } from './auth-guard.service';
 
 @Injectable()
 export class UnauthGuardService {
 
-  constructor(private authService: AuthGuardService, private cognitoService: CognitoService, private router: Router) { }
+  constructor(private oauthService: OAuthService, private authService: AuthGuardService, private router: Router) { }
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
-
-    return this.checkLogin()
-  }
-
-  checkLogin(): boolean {
-    console.log("checking loging from unauth");
-    if (this.authService.isLoggedIn) {
+    if (this.oauthService.hasValidAccessToken()) {
       this.router.navigate(['']);
       return false;
     }
     return true;
   }
-
 }

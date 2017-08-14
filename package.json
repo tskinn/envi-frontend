@@ -27,6 +27,7 @@
     "@ngrx/effects": "^4.0.2",
     "@ngrx/store": "^4.0.2",
     "amazon-cognito-identity-js": "^1.19.0",
+    "angular-oauth2-oidc": "^1.0.20",
     "aws-sdk": "^2.76.0",
     "core-js": "^2.4.1",
     "ng2-fuse": "^0.1.0",
