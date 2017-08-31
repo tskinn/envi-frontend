@@ -8,11 +8,12 @@ import 'rxjs/add/operator/map';
 import { SuperSearchComponent } from '../super-search/super-search.component';
 import { ExportComponent } from '../export/export.component';
 import { ImportComponent } from '../import/import.component';
-import { LoginService } from '../../core/login.service';
-import { DbItem } from '../../core/db-item';
-import { State } from '../../core/state/model';
-import { getItems, getSelected } from '../../core/state/reducer';
-import * as Acts from '../../core/state/actions';
+import { LoginService } from '../core/login.service';
+import { DynamodbService } from '../core/dynamodb.service';
+import { DbItem } from '../core/db-item';
+import { State } from '../core/state/model';
+import { getItems, getSelected } from '../core/state/reducer';
+import * as Acts from '../core/state/actions';
 
 @Component({
   selector: 'app-main',
@@ -35,7 +36,10 @@ export class MainComponent implements OnInit {
   currentItems: DbItem[];
   items: Observable<DbItem[]>;
   selectedItem: Observable<DbItem>;
-  constructor(private store: Store<State>, private loginService: LoginService, public dialog: MdDialog) {
+  constructor(private store: Store<State>,
+              private loginService: LoginService,
+              public dialog: MdDialog,
+              private dynamo: DynamodbService) {
     this.items = store.select(getItems);
     this.items.subscribe(items => this.currentItems = items);
     this.selectedItem = store.select(getSelected).map(id => {
@@ -45,6 +49,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dynamo.getAllItems()
   }
 
   logout() {
@@ -57,9 +62,9 @@ export class MainComponent implements OnInit {
 
   openSearch() {
     console.log('opening search');
-    this.dialog.open(SuperSearchComponent).afterClosed().subscribe(result => {
-      console.log(result);
-    })
+    // this.dialog.open(SuperSearchComponent).afterClosed().subscribe(result => {
+    //   console.log(result);
+    // })
   }
 
   openExport() {
@@ -75,7 +80,7 @@ export class MainComponent implements OnInit {
   }
 
   onSave(item: DbItem) {
-    console.log('saving ' + item.name); // TODO change to UPDATE_ITEM once dynamodb conected
+    console.log('saving ' + item.application); // TODO change to UPDATE_ITEM once dynamodb conected
     this.store.dispatch({ type: Acts.ITEM_UPDATED, payload: item });
   }
 

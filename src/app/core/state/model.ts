@@ -17,39 +17,39 @@ export const initialState: State = {
     items: [
       {
       'id': '1243',
-      'name': 'kms-object-reps',
+      'application': 'kms-object-reps',
       'environment': 'production',
-      'vars': [
-        { 'key': 'dns', 'value': 'bad' },
-        { 'key': 'hello', 'value': 'world' },
-        { 'key': 'carrots', 'value': 'orange' },
-        { 'key': 'bananas', 'value': 'yellow' },
-        { 'key': 'apples', 'value': 'red' },
-        { 'key': 'dsn', 'value': 'database' },
-        { 'key': 'pineapple', 'value': 'i dont know' },
-        { 'key': 'mango', 'value': 'greenish redish' }
+      'variables': [
+        { 'name': 'dns', 'value': 'bad' },
+        { 'name': 'hello', 'value': 'world' },
+        { 'name': 'carrots', 'value': 'orange' },
+        { 'name': 'bananas', 'value': 'yellow' },
+        { 'name': 'apples', 'value': 'red' },
+        { 'name': 'dsn', 'value': 'database' },
+        { 'name': 'pineapple', 'value': 'i dont know' },
+        { 'name': 'mango', 'value': 'greenish redish' }
       ],
       'lock': 1
     },
       {
       'id': '1244',
-      'name': 'kms-object-reps',
+      'application': 'kms-object-reps',
       'environment': 'staging',
-      'vars': [{ 'key': 'vars', 'value': 'no' }],
+      'variables': [{ 'name': 'vars', 'value': 'no' }],
       'lock': 1
     },
       {
       'id': '124213',
-      'name': 'kms-api-event-registration',
+      'application': 'kms-api-event-registration',
       'environment': 'production',
-      'vars': [{ 'key': 'vars', 'value': 'yes' }],
+      'variables': [{ 'name': 'vars', 'value': 'yes' }],
       'lock': 1
     },
       {
       'id': '12423',
-      'name': 'kms-api-event-registration',
+      'application': 'kms-api-event-registration',
       'environment': 'staging',
-      'vars': [{ 'key': 'vars', 'value': 'ok' }],
+      'variables': [{ 'name': 'vars', 'value': 'ok' }],
       'lock': 1
     }
     ],

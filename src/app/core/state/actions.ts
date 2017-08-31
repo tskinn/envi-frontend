@@ -15,6 +15,7 @@ export const ALL_ITEMS_GOT = '[DB] Retrieve items success';
 export const ALL_ITEMS_NOT_GOT = '[DB] Retreive items fail';
 export const SELECTED = '[UI] Selected item';
 export const LOGGED_IN = '[Local] Logged in';
+export const LOGGED_IN_SUCCESS = '[Local] Logged in success';
 export const LOGGED_OUT = '[Local] Logged out';
 
 // actions
@@ -49,6 +50,9 @@ export class Select implements Action {
 export class LoggedIn implements Action {
   readonly type = LOGGED_IN;
 }
+export class LoggedInSuccess implements Action {
+  readonly type = LOGGED_IN_SUCCESS;
+}
 export class LoggedOut implements Action {
   readonly type = LOGGED_OUT;
 }
@@ -61,4 +65,5 @@ export type All = ItemsUpdated
   | AllItemsNotGot
   | Select
   | LoggedIn
+  | LoggedInSuccess
   | LoggedOut;

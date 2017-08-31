@@ -1,0 +1,11 @@
+<md-card *ngIf="original">
+    <md-card-content>
+        <md-input-container>
+            <input mdInput #listFilter (keyup)="o" placeholder="search">
+        </md-input-container>
+        <md-nav-list dense>
+            <app-var fxLayout="row" *ngFor="let envVar of (original.variables | ngFuse:listFilter.value:{keys: ['name', 'value']})" [item]="envVar" (onEdit)=onEdit($event)></app-var>
+        </md-nav-list>
+    </md-card-content>
+    <button md-fab (click)="save()"><md-icon>save</md-icon></button>
+</md-card>

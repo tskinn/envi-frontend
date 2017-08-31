@@ -18,12 +18,13 @@ import * as Acts from './actions';
 @Injectable()
 export class ItemsEffects {
 
-  // @Effect() login = this.actions.ofType(Acts.LOGGED_IN)
-  //   .map(action => {
-  //     console.log("Logging in effect");
-  //     this.router.navigate(['']);
-  //     return action;
-  //   })
+  @Effect() login = this.actions.ofType(Acts.LOGGED_IN)
+    .map(action => {
+      console.log('Logging in effect');
+      // this.router.navigateByUrl('').then(e => console.log('then: ' + e)).catch(e => console.log('catch: ' + e));
+      // this.router.navigateByUrl('');
+      return { type: Acts.LOGGED_IN_SUCCESS};
+    })
 
   // @Effect() logout = this.actions.ofType(Acts.LOGGED_OUT)
   //   .map(action => {
@@ -38,8 +39,8 @@ export class ItemsEffects {
           environment: resp.Attributes['environment'],
           id: resp.Attributes['id'],
           lock: resp.Attributes['lock'],
-          name: resp.Attributes['name'],
-          vars: resp.Attributes['vars'],
+          application: resp.Attributes['application'],
+          variables: resp.Attributes['variables'],
         };
         // TODO just try returning resp.Attributes as the payload?
         return { type: Acts.ITEM_UPDATED, payload: updatedItem };
@@ -55,14 +56,15 @@ export class ItemsEffects {
       })
       .catch(() => Observable.of({ type: Acts.ITEM_NOT_DELETED }))
     );
-  @Effect() getAllItems = this.actions.ofType(Acts.GET_ALL_ITEMS)
-    .switchMap(() => this.dynamo.getAllItems()
-      .map((resp: DynamoDB.DocumentClient.ScanOutput) => {
-        // TODO does scanoutput really map to dbitem ok?
-        return { type: Acts.ALL_ITEMS_GOT, payload: resp.Items }
-      })
-      .catch(() => Observable.of({ type: Acts.ALL_ITEMS_NOT_GOT }))
-    );
+
+  // @Effect() getAllItems = this.actions.ofType(Acts.GET_ALL_ITEMS)
+  //   .switchMap(() => this.dynamo.getAllItems()
+  //     .map((resp: DynamoDB.DocumentClient.ScanOutput) => {
+  //       // TODO does scanoutput really map to dbitem ok?
+  //       return { type: Acts.ALL_ITEMS_GOT, payload: resp.Items }
+  //     })
+  //              .catch((e) => Observable.of({ type: Acts.ALL_ITEMS_NOT_GOT, payload: e}))
+  //   );
 
   constructor(private router: Router,
     private actions: Actions,

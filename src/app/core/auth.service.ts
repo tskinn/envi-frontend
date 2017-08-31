@@ -5,6 +5,9 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
   private _storage: Storage = localStorage;
+  private clientId: string;
+  private issuer: string;
+
 
   constructor() { }
 
@@ -87,9 +90,9 @@ export class AuthService {
       return false;
     }
 
-    if (accessToken && !this.checkAtHash(accessToken, claims)) {
-      return false;
-    }
+    // if (accessToken && !this.checkAtHash(accessToken, claims)) {
+    //   return false;
+    // }
 
     let now = Date.now();
     let issuedAtMSec = claims.iat * 1000;

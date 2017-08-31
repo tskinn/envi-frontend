@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { DbItem, Var } from '../../core/db-item';
+import { DbItem, Var } from '../core/db-item';
 
 @Component({
   selector: 'app-vars',
@@ -13,6 +13,9 @@ import { DbItem, Var } from '../../core/db-item';
     position: fixed;
     right: 20px;
     bottom: 20px;
+  }
+  app-var {
+    margin: 5px;
   }
 `]
 })
@@ -46,14 +49,14 @@ export class VarsComponent implements OnInit {
     this.dirty = true; // TODO be a little more thorough with checking if values are different
     if (old == null) { // new key
       // only push
-      this.copy.vars.push(fresh);
+      this.copy.variables.push(fresh);
     } else {
       // replace Var
       // create new list without old var
-      let varList = this.copy.vars.filter(item => item.key != old.key);
+      let varList = this.copy.variables.filter(item => item.name != old.name);
       // add updated var
       varList.push(fresh);
-      this.copy.vars = varList;
+      this.copy.variables = varList;
       console.log(this.original);
       console.log(this.copy);
     }

@@ -1,0 +1,11 @@
+<div fxLayout="column">
+    <md-input-container>
+        <input mdInput #listFilter (keyup)="o" placeholder="search">
+    </md-input-container>
+    <button md-raised-button [class.selected]="selected == item.id" *ngFor="let item of (items | ngFuse:listFilter.value:{keys: ['application', 'environment']})" >
+        <a fxLayout="row" (click)="select(item)">
+            <h3 fxFlex="start" md-line>{{item.application}}</h3>
+            <p fxFlex="end" md-line>{{item.environment}}</p>
+        </a>
+    </button>
+</div>

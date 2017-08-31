@@ -5,15 +5,15 @@
     <md-nav-list dense>
         <a md-list-item fxLayout="row" *ngFor="let item of (vars | async | ngFuse:listFilter.value:{keys: ['v.key', 'v.value', 'name', 'environment'], includeMatches: true})" (click)="select(item)">
             <div *ngIf="listFilter.value">
-                <h4 md-line>{{item.item.v.key}}:{{item.item.v.value}}</h4>
+                <h4 md-line>{{item.item.v.name}}:{{item.item.v.value}}</h4>
                 <p md-line>{{item.item.name}}:{{item.item.environment}}</p>
             </div>
             <div *ngIf="!listFilter.value">
-                <h4 md-line>{{item.v.key}}:{{item.v.value}}</h4>
+                <h4 md-line>{{item.v.name}}:{{item.v.value}}</h4>
                 <p md-line>{{item.name}}:{{item.environment}}</p>
             </div>
         </a>
     </md-nav-list>
-    <p *ngIf="selected">{{selected.v.key}}:{{selected.v.value}}::::{{selected.name}}:{{selected.environment}}</p>
+    <p *ngIf="selected">{{selected.v.name}}:{{selected.v.value}}::::{{selected.name}}:{{selected.environment}}</p>
     <button md-button (click)="close()">close</button>
 </div>

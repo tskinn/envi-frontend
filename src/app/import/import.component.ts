@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DynamodbService } from '../../core/dynamodb.service';
+import { DynamodbService } from '../core/dynamodb.service';
 
 import { MdDialogRef } from '@angular/material';
 

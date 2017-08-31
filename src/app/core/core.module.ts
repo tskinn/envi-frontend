@@ -5,18 +5,14 @@ import { MdInputModule } from '@angular/material';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
-import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { LoginService } from './login.service';
-import { AwsService } from './aws.service';
-import { CognitoService } from './cognito.service';
 import { DynamodbService } from './dynamodb.service';
 import { AuthGuardService } from './auth-guard.service';
-import { UnauthGuardService } from './unauth-guard.service';
 import { initialState } from './state/model';
 import { reducer } from './state/reducer';
 import { ItemsEffects } from './state/effects';
-import { AuthService } from './auth.service'
+import { AuthService } from './auth.service';
 
 @NgModule({
   imports: [
@@ -24,17 +20,13 @@ import { AuthService } from './auth.service'
     HttpModule,
     MdInputModule,
     StoreModule.forRoot({ app: reducer }, { initialState }),
-    EffectsModule.forRoot([ItemsEffects]),
-    OAuthModule.forRoot()
+    EffectsModule.forRoot([ItemsEffects])
   ],
   declarations: [],
   providers: [
     LoginService,
-    AwsService,
-    CognitoService,
     DynamodbService,
     AuthGuardService,
-    UnauthGuardService,
     ItemsEffects,
     AuthService
   ],

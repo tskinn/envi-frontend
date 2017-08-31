@@ -1,12 +1,12 @@
 export interface DbItem {
   id: string;
-  vars: Var[];
-  name: string;
+  variables: Var[];
+  application: string;
   environment: string;
   lock: number;
 }
 
 export interface Var {
-  key: string;
+  name: string;
   value: string;
 }

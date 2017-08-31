@@ -5,9 +5,9 @@ import { MdDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/operator/map'
 
-import { DbItem, Var } from '../../core/db-item';
-import { State } from '../../core/state/model';
-import { getItems } from '../../core/state/reducer';
+import { DbItem, Var } from '../core/db-item';
+import { State } from '../core/state/model';
+import { getItems } from '../core/state/reducer';
 
 @Component({
   selector: 'app-super-search',
@@ -35,8 +35,8 @@ export class SuperSearchComponent implements OnInit {
     this.vars = store.select(getItems).map((dbItems: DbItem[]) => {
       let vars: FlatVar[] = [];
       dbItems.forEach(item => {
-        item.vars.forEach(v => {
-          vars.push(new FlatVar(v, item.name, item.environment, item.id.toString()));
+        item.variables.forEach(v => {
+          vars.push(new FlatVar(v, item.application, item.environment, item.id.toString()));
         });
       });
       return vars;

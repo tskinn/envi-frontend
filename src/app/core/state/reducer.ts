@@ -32,11 +32,11 @@ export function reducer(state: AppState, action: Action): AppState {
   }
   case Actions.VAR_UPDATED: {
     const i = state.items.findIndex(item => item.id == action.payload.id);
-    const j = state.items[i].vars.findIndex(v => v.key == action.payload.key);
-    state.items[i].vars[j].value = action.payload.value;
+    const j = state.items[i].variables.findIndex(v => v.name == action.payload.key);
+    state.items[i].variables[j].value = action.payload.value;
     return {...state};
   }
-  case Actions.LOGGED_IN: {
+  case Actions.LOGGED_IN_SUCCESS: {
     return {...state, loggedIn: true};
   }
   case Actions.LOGGED_OUT: {
